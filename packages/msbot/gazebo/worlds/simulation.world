@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+  Gazebo ROS skid steer drive plugin demo
+
+  Try sending commands:
+
+    ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{linear: {x: 1.0}}' -1
+
+    ros2 topic pub /demo/cmd_demo geometry_msgs/Twist '{angular: {z: 0.1}}' -1
+
+  Try listening to odometry:
+
+    ros2 topic echo /demo/odom_demo
+
+  Try listening to TF:
+
+    ros2 run tf2_ros tf2_echo odom_demo chassis
+
+    ros2 run tf2_ros tf2_echo chassis right_wheel0
+
+    ros2 run tf2_ros tf2_echo chassis left_wheel0
+
+    ros2 run tf2_ros tf2_echo chassis right_wheel1
+
+    ros2 run tf2_ros tf2_echo chassis left_wheel1
+-->
+<sdf version="1.6">
+    <world name="default">
+
+        <physics name="1ms" type="ignored">
+            <max_step_size>0.001</max_step_size>
+            <real_time_factor>1.0</real_time_factor>
+        </physics>
+        <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"></plugin>
+        <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"></plugin>
+        <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"></plugin>
+        <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"></plugin>
+
+        <!-- light -->
+        <include><uri>model://sun</uri></include>
+
+        <!-- floor -->
+        <include><uri>model://ground-plane</uri></include>
+
+        <!-- robot -->
+        <include><uri>model://msbot-ackermann</uri></include>
+
+    </world>
+</sdf>
