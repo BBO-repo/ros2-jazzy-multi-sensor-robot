@@ -52,3 +52,5 @@ CATKIN_IGNORE
 
 # ROS workspace
 msbot_ws/
+core
+notes
